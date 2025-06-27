@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instituição - SolidarioToken DApp</title>
+  <link rel="stylesheet" type="text/css" href="layout.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+  <script src="abas.js"></script>
+  <script src="app.js"></script>
+ </head>
+<body>
+  <header>
+    <div class="header-left">
+      <h1>Instituição</h1> <h2>Casas de repouso, asilos, abrigos para idosos ou centros de acolhimento</h2>
+      <h2>SolidarioToken DApp</h2>
+    </div>
+    <div class="header-wallet-info">
+      <button onclick="connectWallet()">Conectar Carteira</button>
+      <p><strong>Endereço:</strong> <span id="walletAddress">Não conectado</span></p>
+      <p><strong>Saldo:</strong> <span id="balance">0 SBR</p>
+    </div>
+  </header>
+  <main>
+    <div class="tabs">
+      <button class="tab-button active" onclick="openTab(event, 'welcome')">Bem-vindo</button>
+      <button class="tab-button" onclick="openTab(event, 'mint')">Mintar Tokens</button>
+      <button class="tab-button" onclick="openTab(event, 'burn')">Queimar Tokens</button>
+      <button class="tab-button" onclick="openTab(event, 'admin')">Admin</button>
+      <button class="tab-button" onclick="openTab(event, 'project')">O Projeto</button>
+      <button class="tab-button" onclick="openTab(event, 'developer')">Desenvolvedor</button>
+    </div>
+
+    <div id="welcome" class="tab-content active">
+  <div class="welcome-section content-section-text">
+    <p>
+      Bem-vindo ao DApp da **Instituição**! Nosso objetivo principal é **apoiar** casa de repouso e centro de acolhimento para idosos. Ao **adquirir tokens solidários**, você demonstra seu **apoio** e ajuda a **melhorar a vida** dos nossos queridos residentes. Junte-se a nós nesta nobre causa!
+    </p>
+  </div>
+</div>
+    <div id="mint" class="tab-content">
+      <div class="flex-container-single-item">
+        <div class="function-box-item">
+          <h3>Mintar Tokens</h3>
+          <input type="text" id="mintAddress" placeholder="Endereço para Mint" />
+          <input type="number" id="mintAmount" placeholder="Quantidade para Mint" />
+          <button onclick="mint()">Mintar</button>
+        </div>
+      </div>
+      <div>
+        <p><span style="color: #155724; font-size: 16px;"> 
+            <strong>Entenda o "Mintar":</strong> Neste contexto, a função **mint** é o processo de **criar novos SolidarioTokens**. Ao clicar em "Mintar e Doar", você **adquire esses tokens** e, simultaneamente, **realiza sua doação à Instituição**. Seus tokens são o seu comprovante digital de apoio!
+        </span>
+          </p>
+    </div>
+    </div>
+
+    <div id="burn" class="tab-content">
+        <div class="flex-container-single-item">
+            <div class="function-box-item">
+                <h3>Queimar Tokens</h3>
+                <input type="number" id="burnAmount" placeholder="Quantidade para Queimar" />
+                <button onclick="burn()">Queimar Tokens</button>
+            </div>
+        </div>
+        <div>
+          <center>
+           <p>
+              <span style="color: #155724; font-size: 16px;"> 
+                Queimar  <strong>(pela Instituição)</strong> = Reduzir o estoque, demonstrar uso ou gerenciar a oferta simbólica.
+                <br>
+                Queimar <strong>(pelo Doador) </strong>= Abrir mão dos benefícios e do comprovante. Nunca para reaver a doação.
+              </span>
+            </p>
+          </center>
+        </div>
+    </div>
+
+    <div id="admin" class="tab-content">
+        <div class="flex-container-single-item">
+            <div class="function-box-item">
+                <h3>Funções Administrativas</h3>
+                <button onclick="pause()">Pausar Contrato</button>
+                <button onclick="unpause()">Despausar Contrato</button>
+            </div>
+        </div>
+    </div>
+
+  <div id="project" class="tab-content">
+  <div class="content-section-text">
+    <h4>O SolidarioToken: Transformando Apoio em Transparência Ativa</h4>
+    <p>
+      A ideia de que a própria instituição tenha seu token e sua transparência é muito poderosa e pode trazer diversos benefícios.
+    </p>
+    <h4>Seu Token em Ação</h4>
+    <ul>
+      <li>🌟 Maior Prestação de Contas: Quando a Instituição é a principal responsável pela gestão e prestação de contas do seu próprio token, ela se torna diretamente responsável por cada transação. Isso incentiva uma gestão mais fiscalizada e transparente.</li>
+      <li>🌟 Engajamento e Confiança dos Doadores: Ver a própria instituição sendo proativa na transparência, mostrando exatamente como os recursos são usados, aumenta drasticamente a confiança dos doadores. Eles se sentirão mais seguros de que suas contribuições estão realmente chegando ao destino pretendido.</li>
+      <li>🌟 Redução de Intermediários: Se a instituição gerencia seu próprio token, você minimiza a necessidade de intermediários que poderiam adicionar custos ou complexidade ao processo.</li>
+      <li>🌟 Alinhamento com os Objetivos: A instituição está em melhor posição para detalhar como o uso dos tokens se alinha com seus objetivos específicos (por exemplo, "compramos 10 cadeiras de rodas" ou "reformamos a cozinha").</li>
+      <li>🌟 Potencial para Auditoria Direta: Com registros transparentes, auditores independentes ou até mesmo a comunidade de doadores podem verificar o uso dos fundos de forma mais direta e eficaz.</li>
+      
+    </ul>
+
+    <h4>Como Implementar a Transparência da Própria Instituição</h4>
+    <p>
+      Nosso objetivo é continuar explorando novas formas de ampliar o impacto do Token, garantindo que cada contribuição seja maximizada e totalmente transparente:
+    </p>
+    <ul>
+      <li>🌟 **Doações Flexíveis:** Integração com sistemas de pagamento como **Pix ou cartão de crédito**, permitindo que suas doações em moeda fiduciária sejam facilmente convertidas em tokens.</li>
+      <li>🌟 **Agradecimento Único:** Cada doador poderá receber **NFTs de agradecimento personalizados**, uma forma digital e permanente de reconhecimento pelo seu apoio.</li>
+      <li>🌟 **Dashboard Público:** Um **Dashboard público** será implementado para oferecer visibilidade completa sobre o uso dos fundos arrecadados e o impacto gerado, fortalecendo a confiança e a prestação de contas de forma inquestionável.</li>
+      <li>🌟 **Responsabilidade Fiscal Aprimorada:** Capacidade de emitir **recibos/declarações para dedução no Imposto de Renda**, garantindo o reconhecimento fiscal da sua generosidade.</li>
+      <li>🌟 **Digitalização de Comprovantes:** A Instituição precisaria digitalizar e anexar comprovantes (notas fiscais, recibos) diretamente à transação do token na plataforma. Isso cria um registro auditável do que foi comprado.</li>
+      <li>🌟 **Relatórios Automáticos:** A plataforma geraria relatórios periódicos (mensais, trimestrais) que a própria instituição publicaria, mostrando o fluxo dos tokens e as principais categorias de gastos.</li>
+    </ul>
+    <p>
+      Junte-se à comunidade SolidarioToken e faça parte desta jornada de impacto social e inovação! Seu apoio, com total transparência e prestação de contas, faz a diferença na vida de nossos idosos.
+    </p>
+  </div>
+</div>
+   <div id="developer" class="tab-content">
+  <div class="content-section-text">
+    <h4>A Jornada: Construindo com Propósito do Aprendizado</h4>
+    <p>
+      O SolidarioToken DApp representa um marco especial: é o **primeiro projeto em blockchain** desenvolvido por mim! Com ele, vislumbro um mundo de **infinitas possibilidades** que a tecnologia descentralizada pode oferecer, especialmente em causas sociais.
+    </p>
+   
+    <p>
+      Esta iniciativa é um laboratório de aprendizado contínuo. Para dar vida ao SolidarioToken, utilizei ferramentas e tecnologias fundamentais do ecossistema blockchain e web:
+    </p>
+    <ul>
+      <li>🛠️ **OpenZeppelin:** Contratos inteligentes seguros e auditados, a base para a confiabilidade do token.</li>
+      <li>💻 **Remix IDE:** O ambiente de desenvolvimento integrado para Solidity, onde a lógica do contrato inteligente foi criada e testada.</li>
+      <li>🌐 **HTML, CSS e JavaScript:** Os pilares da web, construindo a interface intuitiva e responsiva que você vê.</li>
+      <li>📚 **Biblioteca Ethers.js:** Essencial para a comunicação entre o DApp e a blockchain, permitindo a interação com os contratos inteligentes de forma fluida.</li>
+      <li>🌐 **prompts de comando*:* utilizei a Gemini para me auxiliar na **reformulação de textos**, na **revisão e correção gramatical** e na **harmonização visual do frontend**, otimizando o processo de construção e refinamento do DApp.</li>
+    </ul>
+    <p>
+      Com uma abordagem **básica e simples**, o foco principal deste projeto é a **aprendizagem prática**. Cada linha de código e cada funcionalidade foram passos importantes para explorar o potencial transformador da blockchain em projetos com impacto real. É um convite para o futuro, onde a tecnologia e a solidariedade andam de mãos dadas!
+    </p>
+  </div>
+</div>
+  </main>
+
+</body>
+</html>
